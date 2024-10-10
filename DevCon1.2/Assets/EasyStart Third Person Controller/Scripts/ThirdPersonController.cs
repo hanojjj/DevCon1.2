@@ -1,9 +1,6 @@
-﻿using UnityEditor;
-using UnityEditor.SceneManagement;
+﻿
 using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.Timeline;
-using UnityEngine.UIElements;
 
 /*
     This file has a commented version with details about how each line works. 
@@ -18,12 +15,9 @@ using UnityEngine.UIElements;
 /// </summary>
 public class ThirdPersonController : MonoBehaviour
 {
-    object Cowboy;
-    PrefabOverride Cowboy_RIO;
-    public GameObject RioPrefab_RIO;
 
     [Tooltip("Speed ​​at which the character moves. It is not affected by gravity or jumping.")]
-    public float velocity = 1f;
+    public float velocity = 5f;
     [Tooltip("This value is added to the speed value while the character is sprinting.")]
     public float sprintAdittion = 3.5f;
     [Tooltip("The higher the value, the higher the character will jump.")]
@@ -76,34 +70,34 @@ public class ThirdPersonController : MonoBehaviour
         inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
 
         // Check if you pressed the crouch input key and change the player's state
-        if (inputCrouch)
+        if ( inputCrouch )
             isCrouching = !isCrouching;
 
         // Run and Crouch animation
         // If dont have animator component, this block wont run
-        if (cc.isGrounded && animator != null)
+        if ( cc.isGrounded && animator != null )
         {
 
             // Crouch
             // Note: The crouch animation does not shrink the character's collider
             animator.SetBool("crouch", isCrouching);
-
+            
             // Run
             float minimumSpeed = 0.9f;
-            animator.SetBool("run", cc.velocity.magnitude > minimumSpeed);
+            animator.SetBool("run", cc.velocity.magnitude > minimumSpeed );
 
             // Sprint
             isSprinting = cc.velocity.magnitude > minimumSpeed && inputSprint;
-            animator.SetBool("sprint", isSprinting);
+            animator.SetBool("sprint", isSprinting );
 
         }
 
         // Jump animation
-        if (animator != null)
-            animator.SetBool("air", cc.isGrounded == false);
+        if( animator != null )
+            animator.SetBool("air", cc.isGrounded == false );
 
         // Handle can jump or not
-        if (inputJump && cc.isGrounded)
+        if ( inputJump && cc.isGrounded )
         {
             isJumping = true;
             // Disable crounching when jumping
@@ -121,10 +115,10 @@ public class ThirdPersonController : MonoBehaviour
 
         // Sprinting velocity boost or crounching desacelerate
         float velocityAdittion = 0;
-        if (isSprinting)
+        if ( isSprinting )
             velocityAdittion = sprintAdittion;
         if (isCrouching)
-            velocityAdittion = -(velocity * 0.50f); // -50% velocity
+            velocityAdittion =  - (velocity * 0.50f); // -50% velocity
 
         // Direction movement
         float directionX = inputHorizontal * (velocity + velocityAdittion) * Time.deltaTime;
@@ -132,7 +126,7 @@ public class ThirdPersonController : MonoBehaviour
         float directionY = 0;
 
         // Jump handler
-        if (isJumping)
+        if ( isJumping )
         {
 
             // Apply inertia and smoothness when climbing the jump
@@ -151,7 +145,7 @@ public class ThirdPersonController : MonoBehaviour
         // Add gravity to Y axis
         directionY = directionY - gravity * Time.deltaTime;
 
-
+        
         // --- Character rotation --- 
 
         Vector3 forward = Camera.main.transform.forward;
@@ -176,12 +170,12 @@ public class ThirdPersonController : MonoBehaviour
 
         // --- End rotation ---
 
-
+        
         Vector3 verticalDirection = Vector3.up * directionY;
         Vector3 horizontalDirection = forward + right;
 
         Vector3 moviment = verticalDirection + horizontalDirection;
-        cc.Move(moviment);
+        cc.Move( moviment );
 
     }
 
@@ -201,93 +195,6 @@ public class ThirdPersonController : MonoBehaviour
             jumpElapsedTime = 0;
             isJumping = false;
         }
-    }
-
-    public abstract class PrefabOverride
-    {
-        public abstract void Apply(string prefabAssetPath, InteractionMode mode);
-
-        public abstract void Revert(InteractionMode mode);
-
-        //
-        // Summary:
-        //     Applies the override to the Prefab Asset at the given path.
-        //
-        // Parameters:
-        //   prefabAssetPath:
-        //     The path of the Prefab Asset to apply to.
-        public void Apply()
-        {
-            Object assetObject = GetAssetObject();
-            Apply(AssetDatabase.GetAssetPath(assetObject), InteractionMode.UserAction);
-        }
-
-        //
-        // Summary:
-        //     Applies the override to the Prefab Asset at the given path.
-        //
-        // Parameters:
-        //   prefabAssetPath:
-        //     The path of the Prefab Asset to apply to.
-        public void Apply(string prefabAssetPath)
-        {
-            Apply(prefabAssetPath, InteractionMode.UserAction);
-        }
-
-        public void Apply(InteractionMode mode)
-        {
-            Object assetObject = GetAssetObject();
-            Apply(AssetDatabase.GetAssetPath(assetObject), mode);
-        }
-
-        //
-        // Summary:
-        //     Reverts the override on the Prefab instance.
-        public void Revert()
-        {
-            Revert(InteractionMode.UserAction);
-        }
-
-        //
-        // Summary:
-        //     Finds the object in the Prefab Asset at the given path which will be applied
-        //     to.
-        //
-        // Parameters:
-        //   prefabAssetPath:
-        //     The asset path of the Prefab Asset to apply to.
-        //
-        // Returns:
-        //     The object inside the Prefab Asset affected by the override.
-        protected Object FindApplyTargetAssetObject(string prefabAssetPath)
-        {
-            Object @object = GetAssetObject();
-            while (@object != null)
-            {
-                string assetPath = AssetDatabase.GetAssetPath(@object);
-                if (assetPath == prefabAssetPath)
-                {
-                    return @object;
-                }
-
-                @object = PrefabUtility.GetCorrespondingObjectFromSource(@object);
-            }
-
-            return null;
-        }
-
-        //
-        // Summary:
-        //     Returns the asset object of the override in the outermost Prefab that the Prefab
-        //     instance comes from.
-        //
-        // Returns:
-        //     The object inside the Prefab Asset affected by the override.
-        public abstract Object GetAssetObject();
-
-        internal abstract Object GetObject();
-
-
     }
 
 }
