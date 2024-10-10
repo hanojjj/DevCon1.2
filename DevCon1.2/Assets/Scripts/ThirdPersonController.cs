@@ -23,7 +23,7 @@ public class ThirdPersonController : MonoBehaviour
     public GameObject RioPrefab_RIO;
 
     [Tooltip("Speed ​​at which the character moves. It is not affected by gravity or jumping.")]
-    public float velocity = 5f;
+    public float velocity = 1f;
     [Tooltip("This value is added to the speed value while the character is sprinting.")]
     public float sprintAdittion = 3.5f;
     [Tooltip("The higher the value, the higher the character will jump.")]
