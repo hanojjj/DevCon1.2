@@ -4974,6 +4974,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8298567168785214658, guid: 35c44a97c30e4e946a0f4d3310613b95, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 35c44a97c30e4e946a0f4d3310613b95, type: 3}
       propertyPath: m_Name
       value: Magician_RIO_Unity
@@ -5883,6 +5887,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3490930834329334354, guid: 08bdb42a7413db34e867890b29e20ecd, type: 3}
   m_PrefabInstance: {fileID: 840643932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &842997191 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6992461296056172994, guid: 35c44a97c30e4e946a0f4d3310613b95, type: 3}
+  m_PrefabInstance: {fileID: 694933337}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &853077563
 PrefabInstance:
@@ -10665,12 +10674,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b4bd63821d491449ecca6ac55e3dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  render: {fileID: 0}
+  render: {fileID: 842997191}
   player: {fileID: 1442749872}
   skin1: {fileID: 2100000, guid: 474c1b2679015f848889a0f681926dde, type: 2}
   skin2: {fileID: 2100000, guid: 2f710e61d53a1b8408d1f208c72d70c5, type: 2}
-  magician: 0
-  cowboy: 0
+  skin3: {fileID: 2100000, guid: beb63d9bc483f2f41a0e604d95c93221, type: 2}
+  skin4: {fileID: 2100000, guid: 943b07e42ea05884eabea51b12d4e7ba, type: 2}
+  skin: 0
 --- !u!1001 &1447303497
 PrefabInstance:
   m_ObjectHideFlags: 0
