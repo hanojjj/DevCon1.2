@@ -11,13 +11,15 @@ public class SkinSwitcher : MonoBehaviour
 
     public Material skin1;
     public Material skin2;
-    public int skin;
-    
+    public bool magician;
+    public bool cowboy;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        skin = 1;
+        magician = true;
+        cowboy = false;
 
         player = GameObject.FindGameObjectWithTag("Player");
         render = player.GetComponent<Renderer>();
@@ -29,12 +31,14 @@ public class SkinSwitcher : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.K))
         {
-            skin = skin + 1;
+            magician = false;
+            cowboy = true;
             ChangeSkin();
         }
         else if (Input.GetKeyUp(KeyCode.J))
         {
-            skin = skin - 1;
+            magician = true;
+            cowboy = false;
             ChangeSkin();
         }
 
@@ -45,11 +49,11 @@ public class SkinSwitcher : MonoBehaviour
 
     void ChangeSkin()
     {
-        if (skin == 1)
+        if (magician == true)
         {
             render.material = skin1;
         }
-        if (skin == 2)
+        if (cowboy == true)
         {
             render.material = skin2;
         }
