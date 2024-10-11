@@ -42,17 +42,17 @@ public class ThirdPersonController : MonoBehaviour
     bool inputCrouch;
     bool inputSprint;
 
-    Animator animator;
+    //Animator animator;
     CharacterController cc;
 
 
     void Start()
     {
         cc = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
 
         // Message informing the user that they forgot to add an animator
-        if (animator == null)
+        //if (animator == null)
             Debug.LogWarning("Hey buddy, you don't have the Animator component in your player. Without it, the animations won't work.");
     }
 
@@ -75,26 +75,26 @@ public class ThirdPersonController : MonoBehaviour
 
         // Run and Crouch animation
         // If dont have animator component, this block wont run
-        if ( cc.isGrounded && animator != null )
+        //if ( cc.isGrounded && animator != null )
         {
 
             // Crouch
             // Note: The crouch animation does not shrink the character's collider
-            animator.SetBool("crouch", isCrouching);
+            //animator.SetBool("crouch", isCrouching);
             
             // Run
             float minimumSpeed = 0.9f;
-            animator.SetBool("run", cc.velocity.magnitude > minimumSpeed );
+            //animator.SetBool("run", cc.velocity.magnitude > minimumSpeed );
 
             // Sprint
             isSprinting = cc.velocity.magnitude > minimumSpeed && inputSprint;
-            animator.SetBool("sprint", isSprinting );
+           // animator.SetBool("sprint", isSprinting );
 
         }
 
         // Jump animation
-        if( animator != null )
-            animator.SetBool("air", cc.isGrounded == false );
+        //if( animator != null )
+            //animator.SetBool("air", cc.isGrounded == false );
 
         // Handle can jump or not
         if ( inputJump && cc.isGrounded )

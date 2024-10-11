@@ -16,14 +16,10 @@ public class SkinSwitcher : MonoBehaviour
 
     static public int skin;
 
-    public GameObject doorRed;
-    public GameObject doorYellow;
-    public GameObject doorBlue;
-
-    public bool isGreen;
-    public bool isRed;
-    public bool isYellow;
-    public bool isBlue;
+    static public bool isGreen;
+    static public bool isRed;
+    static public bool isYellow;
+    static public bool isBlue;
 
 
     // Start is called before the first frame update
@@ -37,7 +33,8 @@ public class SkinSwitcher : MonoBehaviour
         isBlue = false;
 
         player = GameObject.FindGameObjectWithTag("Player");
-        doorBlue = GetComponent<GameObject>();
+       
+
         render = player.GetComponent<Renderer>();
         render.enabled = true;
     }
@@ -99,11 +96,6 @@ public class SkinSwitcher : MonoBehaviour
             isYellow = false;
             isBlue = false;
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
     }
 
 }
