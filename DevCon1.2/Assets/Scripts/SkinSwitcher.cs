@@ -32,8 +32,7 @@ public class SkinSwitcher : MonoBehaviour
         isYellow = false;
         isBlue = false;
 
-        player = GameObject.FindGameObjectWithTag("Player");
-       
+        player = player.GetComponent<GameObject>();
 
         render = player.GetComponent<Renderer>();
         render.enabled = true;
@@ -42,10 +41,16 @@ public class SkinSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Debug.Log("Input Found");
+        }
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             skin = skin + 1;
             ChangeSkin();
+            Debug.Log("Input Found");
         }
         else if (skin >= 5)
         {

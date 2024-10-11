@@ -3,7 +3,13 @@ guid: 39b4bd63821d491449ecca6ac55e3dfe
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - render: {instanceID: 0}
+  - player: {instanceID: 0}
+  - skin1: {instanceID: 0}
+  - skin2: {instanceID: 0}
+  - skin3: {instanceID: 0}
+  - skin4: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
