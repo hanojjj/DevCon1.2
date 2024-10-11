@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+//using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -42,7 +42,7 @@ public class SkinSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             skin = skin + 1;
             ChangeSkin();
